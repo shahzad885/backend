@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-backend-deployment
+  labels:
+    app: express-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: express-backend
+  template:
+    metadata:
+      labels:
+        app: express-backend
+    spec:
+      containers:
+        - name: express-backend
+          # REPLACE THIS with your DockerHub username
+          image: shahzad885/express-backend:latest
+          ports:
+            - containerPort: 5000 # MATCHES DOCKERFILE EXPOSE
