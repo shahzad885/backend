@@ -1,8 +1,7 @@
-
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Micro-URL Shortener for DevOps",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -12,7 +11,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.18.2",
-    "pocketbase": "^0.21.1",
+    "@supabase/supabase-js": "^2.39.3",
     "express-prom-bundle": "^6.6.0",
     "prom-client": "^14.2.0"
   }

@@ -3,8 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import promBundle from "express-prom-bundle";
 import { register } from "prom-client";
-import authRoutes from "./routes/auth.js";
-import todoRoutes from "./routes/todos.js";
+
+// Import new routes
+import urlRoutes from "./routes/urls.js";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const metricsMiddleware = promBundle({
   includePath: true,
   includeStatusCode: true,
   includeUp: true,
-  customLabels: { app: "todo-backend" },
+  customLabels: { app: "url-shortener-backend" },
   promClient: { collectDefaultMetrics: {} },
 });
 
@@ -32,22 +33,21 @@ app.get("/health", (req, res) => {
   res.json({ status: "healthy", timestamp: new Date().toISOString() });
 });
 
-// Metrics endpoint for Prometheus
+// Metrics endpoint
 app.get("/metrics", async (req, res) => {
   res.set("Content-Type", register.contentType);
   res.end(await register.metrics());
 });
 
 // Routes
-app.use("/api/auth", authRoutes);
-app.use("/api/todos", todoRoutes);
+// We mount this at /api/urls
+app.use("/api/urls", urlRoutes);
 
 // Root endpoint
 app.get("/", (req, res) => {
-  res.json({ message: "Todo API is running" });
+  res.json({ message: "DevOps URL Shortener API is running" });
 });
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Metrics available at http://localhost:${PORT}/metrics`);
 });

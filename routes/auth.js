@@ -1,6 +1,6 @@
 import express from "express";
 import PocketBase from "pocketbase";
-import pb from "../config/pocketbase.js";
+import pb from "../config/supabase.js";
 
 const router = express.Router();
 
